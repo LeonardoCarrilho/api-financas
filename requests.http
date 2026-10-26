@@ -1,0 +1,93 @@
+### api-financas — exemplos de requisição
+### Variável de ambiente do VS Code REST Client / JetBrains HTTP Client.
+@base = http://localhost:3000
+@email = demo@financas.dev
+@senha = demo12345
+
+### Health check (público)
+GET {{base}}/api/health
+
+### Registrar usuário
+POST {{base}}/api/auth/register
+Content-Type: application/json
+
+{
+  "name": "Leonardo Carrilho",
+  "email": "leonardo@example.com",
+  "password": "senha-segura-123"
+}
+
+### Login (copie o token da resposta)
+POST {{base}}/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "{{email}}",
+  "password": "{{senha}}"
+}
+
+@token = COLE_O_TOKEN_AQUI
+
+### Usuário autenticado
+GET {{base}}/api/me
+Authorization: Bearer {{token}}
+
+### Contas
+GET {{base}}/api/accounts
+Authorization: Bearer {{token}}
+
+### Nova conta
+POST {{base}}/api/accounts
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "name": "Conta corrente",
+  "type": "checking",
+  "initialBalanceCents": 250000
+}
+
+### Categorias de despesa
+GET {{base}}/api/categories?type=expense
+Authorization: Bearer {{token}}
+
+### Nova categoria
+POST {{base}}/api/categories
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "name": "Mercado",
+  "type": "expense",
+  "color": "#f59e0b"
+}
+
+### Nova transação (valores em centavos)
+POST {{base}}/api/transactions
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "accountId": 1,
+  "categoryId": 1,
+  "type": "expense",
+  "amountCents": 62400,
+  "description": "Compras do mês",
+  "occurredOn": "2026-10-09"
+}
+
+### Listagem com filtros e paginação
+GET {{base}}/api/transactions?from=2026-10-01&to=2026-10-31&type=expense&page=1&limit=20
+Authorization: Bearer {{token}}
+
+### Resumo do mês atual
+GET {{base}}/api/reports/summary
+Authorization: Bearer {{token}}
+
+### Resumo de setembro
+GET {{base}}/api/reports/summary?from=2026-09-01&to=2026-09-30
+Authorization: Bearer {{token}}
+
+### Exportar CSV do período
+GET {{base}}/api/reports/transactions.csv?from=2026-10-01&to=2026-10-31
+Authorization: Bearer {{token}}
