@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">API de Finanças — Node.js, Express, MySQL e JWT</title>
+  <desc id="desc">Prévia da API REST de finanças pessoais com autenticação JWT, valores em centavos, resumo mensal e exportação CSV.</desc>
+
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#04121a" />
+      <stop offset="1" stop-color="#0b1220" />
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#2dd4bf" stop-opacity="0.22" />
+      <stop offset="1" stop-color="#2dd4bf" stop-opacity="0" />
+    </radialGradient>
+    <radialGradient id="glowGold" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#fbbf24" stop-opacity="0.16" />
+      <stop offset="1" stop-color="#fbbf24" stop-opacity="0" />
+    </radialGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#94a3b8" stroke-opacity="0.07" stroke-width="1" />
+    </pattern>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="18" stdDeviation="24" flood-color="#000000" flood-opacity="0.35" />
+    </filter>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg)" />
+  <rect width="1200" height="630" fill="url(#grid)" />
+  <circle cx="1010" cy="120" r="280" fill="url(#glow)" />
+  <circle cx="120" cy="560" r="220" fill="url(#glowGold)" opacity="0.7" />
+
+  <g font-family="'Segoe UI', Arial, sans-serif">
+    <g transform="translate(80 76)">
+      <rect width="250" height="38" rx="19" fill="#2dd4bf" fill-opacity="0.1" stroke="#2dd4bf" stroke-opacity="0.35" />
+      <circle cx="22" cy="19" r="5" fill="#2dd4bf" />
+      <text x="38" y="25" fill="#5eead4" font-size="15" font-weight="700" letter-spacing="2.5">API REST · PORTFÓLIO</text>
+    </g>
+
+    <text x="80" y="196" fill="#f8fafc" font-size="68" font-weight="800" letter-spacing="-1.5">API de Finanças</text>
+    <text x="82" y="246" fill="#94a3b8" font-size="26" font-weight="400">Node.js · Express · MySQL · JWT</text>
+
+    <g transform="translate(80 300)" filter="url(#shadow)">
+      <rect width="1040" height="232" rx="18" fill="#08161d" stroke="#1e293b" />
+      <rect width="1040" height="46" rx="18" fill="#0d1f27" />
+      <rect y="28" width="1040" height="18" fill="#0d1f27" />
+      <circle cx="24" cy="23" r="6" fill="#f87171" />
+      <circle cx="44" cy="23" r="6" fill="#fbbf24" />
+      <circle cx="64" cy="23" r="6" fill="#2dd4bf" />
+      <text x="88" y="28" fill="#64748b" font-size="14" font-family="'Cascadia Code', Consolas, monospace">transactionRoutes.js</text>
+
+      <g font-family="'Cascadia Code', Consolas, monospace" font-size="17">
+        <text x="28" y="82" fill="#64748b">01</text>
+        <text x="64" y="82" fill="#7dd3fc">router</text>
+        <text x="122" y="82" fill="#e2e8f0">.use(</text>
+        <text x="180" y="82" fill="#fbbf24">autenticar</text>
+        <text x="278" y="82" fill="#e2e8f0">);</text>
+
+        <text x="28" y="114" fill="#64748b">02</text>
+        <text x="64" y="114" fill="#7dd3fc">router</text>
+        <text x="122" y="114" fill="#e2e8f0">.get(</text>
+        <text x="174" y="114" fill="#fbbf24">"/resumo"</text>
+        <text x="282" y="114" fill="#e2e8f0">, resumoMensal);</text>
+
+        <text x="28" y="146" fill="#64748b">03</text>
+        <text x="64" y="146" fill="#7dd3fc">router</text>
+        <text x="122" y="146" fill="#e2e8f0">.post(</text>
+        <text x="186" y="146" fill="#fbbf24">"/transacoes"</text>
+        <text x="330" y="146" fill="#e2e8f0">, validar(esquema), criar);</text>
+
+        <text x="28" y="178" fill="#64748b">04</text>
+        <text x="64" y="178" fill="#7dd3fc">router</text>
+        <text x="122" y="178" fill="#e2e8f0">.get(</text>
+        <text x="174" y="178" fill="#fbbf24">"/exportar"</text>
+        <text x="294" y="178" fill="#e2e8f0">, exportarCsv);</text>
+
+        <text x="28" y="210" fill="#64748b">05</text>
+        <text x="64" y="210" fill="#64748b">// centavos inteiros · JWT + scrypt · MySQL e memória</text>
+      </g>
+    </g>
+
+    <g transform="translate(80 568)" font-family="'Segoe UI', Arial, sans-serif" font-size="15" font-weight="600">
+      <g>
+        <rect width="172" height="34" rx="17" fill="#2dd4bf" fill-opacity="0.1" stroke="#2dd4bf" stroke-opacity="0.3" />
+        <text x="86" y="22" fill="#5eead4" text-anchor="middle">Valores em centavos</text>
+      </g>
+      <g transform="translate(188 0)">
+        <rect width="132" height="34" rx="17" fill="#38bdf8" fill-opacity="0.1" stroke="#38bdf8" stroke-opacity="0.3" />
+        <text x="66" y="22" fill="#7dd3fc" text-anchor="middle">JWT + scrypt</text>
+      </g>
+      <g transform="translate(336 0)">
+        <rect width="96" height="34" rx="17" fill="#a78bfa" fill-opacity="0.1" stroke="#a78bfa" stroke-opacity="0.3" />
+        <text x="48" y="22" fill="#c4b5fd" text-anchor="middle">MySQL</text>
+      </g>
+      <g transform="translate(448 0)">
+        <rect width="126" height="34" rx="17" fill="#fbbf24" fill-opacity="0.1" stroke="#fbbf24" stroke-opacity="0.3" />
+        <text x="63" y="22" fill="#fcd34d" text-anchor="middle">32 testes</text>
+      </g>
+      <text x="1040" y="23" fill="#64748b" font-size="14" font-weight="500" text-anchor="end">github.com/LeonardoCarrilho/api-financas</text>
+    </g>
+  </g>
+</svg>

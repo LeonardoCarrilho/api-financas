@@ -10,6 +10,8 @@ flutuante.
 
 Repositório: https://github.com/LeonardoCarrilho/api-financas
 
+![Prévia da API de finanças](docs/preview.svg)
+
 ## Stack
 
 Node.js 20+ · Express 4 · MySQL 8 (`mysql2/promise`) · JWT (`jsonwebtoken`) ·
