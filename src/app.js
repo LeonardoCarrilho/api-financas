@@ -1,3 +1,5 @@
+import { configureSecurity } from "./security.js";
+import { reportServerError } from "./observability.js";
 import express from "express";
 import cors from "cors";
 import helmet from "helmet";
@@ -10,6 +12,7 @@ export function criarApp({ repos, clock, logger = true }) {
   if (!repos) throw new Error("Os repositórios são obrigatórios para criar a aplicação.");
 
   const app = express();
+  configureSecurity(app);
   app.disable("x-powered-by");
 
   app.use(helmet());
@@ -24,7 +27,7 @@ export function criarApp({ repos, clock, logger = true }) {
   app.use(express.json({ limit: "100kb" }));
 
   if (logger && config.nodeEnv !== "test") {
-    app.use(morgan("dev"));
+    app.use(morgan(":method :status :response-time ms"));
   }
 
   app.get("/api/health", (_req, res) => {
@@ -40,6 +43,7 @@ export function criarApp({ repos, clock, logger = true }) {
   app.use("/api", criarRotas({ repos, clock }));
 
   app.use(rotaNaoEncontrada);
+  app.use(reportServerError);
   app.use(tratarErros);
 
   return app;

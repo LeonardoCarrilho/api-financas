@@ -209,3 +209,9 @@ deles é feita subindo o `docker compose` e usando o `requests.http`.
 ## Licença
 
 [MIT](LICENSE) © Leonardo Fernandes Carrilho
+
+## Contribuição e segurança
+
+Leia [AGENTS.md](AGENTS.md) antes de alterar o projeto. Toda tarefa exige issue e PR associado, com validação antes da publicação.
+
+Configuração de produção, observabilidade e limites da hospedagem: [docs/SECURITY.md](docs/SECURITY.md).

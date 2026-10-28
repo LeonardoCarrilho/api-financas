@@ -4,16 +4,16 @@ services:
     container_name: financas-mysql
     restart: unless-stopped
     environment:
-      MYSQL_ROOT_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:?Configure MYSQL_ROOT_PASSWORD}
       MYSQL_DATABASE: financas
       MYSQL_USER: financas
-      MYSQL_PASSWORD: financas
+      MYSQL_PASSWORD: ${DB_PASSWORD:?Configure DB_PASSWORD}
     ports:
-      - "3307:3306"
+      - "127.0.0.1:3307:3306"
     volumes:
       - mysql-dados:/var/lib/mysql
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-u", "root", "-proot"]
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1"]
       interval: 5s
       timeout: 5s
       retries: 20
@@ -28,16 +28,18 @@ services:
     environment:
       NODE_ENV: production
       PORT: 3000
-      CORS_ORIGIN: "*"
-      JWT_SECRET: troque-este-segredo-por-um-valor-aleatorio-de-32-caracteres
+      CORS_ORIGIN: ${CORS_ORIGIN:?Configure CORS_ORIGIN}
+      PUBLIC_ORIGIN: ${PUBLIC_ORIGIN:?Configure PUBLIC_ORIGIN}
+      TRUSTED_PROXIES: ${TRUSTED_PROXIES:-}
+      JWT_SECRET: ${JWT_SECRET:?Configure JWT_SECRET}
       JWT_EXPIRES_IN: 1d
       DB_HOST: mysql
       DB_PORT: 3306
       DB_USER: financas
-      DB_PASSWORD: financas
+      DB_PASSWORD: ${DB_PASSWORD:?Configure DB_PASSWORD}
       DB_NAME: financas
     ports:
-      - "3000:3000"
+      - "127.0.0.1:3000:3000"
     command: ["sh", "-c", "node src/db/migrate.js && node src/server.js"]
 
 volumes:

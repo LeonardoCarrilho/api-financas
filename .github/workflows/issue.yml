@@ -1,0 +1,21 @@
+name: Issue association
+on:
+  pull_request:
+    types: [opened, edited, synchronize, reopened, ready_for_review]
+permissions:
+  contents: read
+  issues: read
+jobs:
+  issue:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/github-script@v7
+        with:
+          script: |
+            const body = context.payload.pull_request.body || "";
+            const refs = [...body.matchAll(/(?:refs|closes|fixes|resolves)\s+#(\d+)/gi)];
+            if (!refs.length) core.setFailed("Referencie uma issue deste repositório: Refs #N ou Closes #N.");
+            for (const match of refs) {
+              const { data } = await github.rest.issues.get({ ...context.repo, issue_number: Number(match[1]) });
+              if (data.pull_request) core.setFailed("A referência deve apontar para uma issue, não outro PR.");
+            }

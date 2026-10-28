@@ -1,0 +1,40 @@
+name: Quality gate
+on:
+  workflow_call:
+permissions:
+  contents: read
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      NODE_ENV: test
+      JWT_SECRET: only-for-isolated-ci-tests-at-least-32-characters
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
+      - run: npm audit --audit-level=low
+      - run: npm run test:coverage
+      - run: npm run test:e2e:security
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: coverage-${{ github.job }}
+          path: |
+            coverage/
+            server/coverage/
+            web/coverage/
+          if-no-files-found: error
+      - uses: codecov/codecov-action@v5
+        if: vars.CODECOV_ENABLED == 'true'
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: coverage/lcov.info,server/coverage/lcov.info,web/coverage/lcov.info
+          fail_ci_if_error: true
