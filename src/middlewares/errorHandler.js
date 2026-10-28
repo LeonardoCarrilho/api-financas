@@ -7,6 +7,7 @@ export function rotaNaoEncontrada(req, _res, next) {
 
 // eslint-disable-next-line no-unused-vars
 export function tratarErros(erro, _req, res, _next) {
+  if (erro.type === "entity.too.large") return res.status(413).json({ error: "Corpo da requisição muito grande." });
   if (erro instanceof AppError) {
     const corpo = { error: erro.message };
     if (erro.details) corpo.details = erro.details;

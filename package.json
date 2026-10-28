@@ -10,8 +10,10 @@
     "start": "node src/server.js",
     "migrate": "node src/db/migrate.js",
     "seed": "node src/db/seed.js",
-    "test": "node --test --test-reporter=spec",
-    "test:coverage": "node --test --experimental-test-coverage"
+    "test": "node --test --test-reporter=spec tests/*.test.js",
+    "test:coverage": "c8 --reporter=lcov --reporter=text node --test tests/*.test.js",
+    "lint": "biome lint .",
+    "test:e2e:security": "playwright test"
   },
   "keywords": [
     "api",
@@ -24,16 +26,21 @@
   "author": "Leonardo Fernandes Carrilho",
   "license": "MIT",
   "dependencies": {
+    "@sentry/node": "^11.10.0",
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
+    "express-rate-limit": "^8.7.1",
     "helmet": "^8.0.0",
     "jsonwebtoken": "^9.0.2",
     "morgan": "^1.10.0",
     "mysql2": "^3.11.5",
-    "zod": "^3.23.8"
+    "zod": "^4.6.7"
   },
   "devDependencies": {
+    "@biomejs/biome": "^2.6.3",
+    "@playwright/test": "^1.64.1",
+    "c8": "^12.0.0",
     "supertest": "^7.0.0"
   },
   "engines": {
