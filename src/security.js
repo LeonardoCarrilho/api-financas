@@ -42,4 +42,3 @@ export function configureSecurity(app, settings = process.env) {
     message: { error: "Muitas tentativas. Aguarde antes de tentar novamente." },
   }));
 }
-

@@ -25,4 +25,3 @@ export function reportServerError(error, _req, _res, next) {
   if (!error.status || error.status >= 500) Sentry.captureException(error);
   next(error);
 }
-

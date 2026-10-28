@@ -32,4 +32,3 @@ test("produção rejeita origem insegura e CORS irrestrito", () => {
   assert.throws(()=>app({NODE_ENV:"production",PUBLIC_ORIGIN:"http://example.com",CORS_ORIGIN:"*"}));
   assert.throws(()=>app({NODE_ENV:"production",PUBLIC_ORIGIN:"https://example.com",CORS_ORIGIN:"*"}));
 });
-

@@ -7,4 +7,3 @@ test("exige login e cria conta pelo servidor HTTP",async({request})=>{
  const account=await request.post("/api/accounts",{headers:{Authorization:"Bearer "+data.token},data:{name:"Conta E2E"}});
  expect(account.status()).toBe(201);
 });
-
